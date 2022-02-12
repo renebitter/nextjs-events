@@ -1,10 +1,6 @@
 const EventItem = (props) => {
-  {
-    console.log(props);
-  }
-
   if (props === undefined) {
-    <div>Loading...</div>;
+    return null;
   } else {
     return (
       <div>

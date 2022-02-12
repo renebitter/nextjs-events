@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import EventItem from '../../components/EventItem';
+import EventDetail from '../../components/EventDetail';
 import { getEventById } from '../../data/dummy-data';
 
 const EventId = () => {
@@ -15,7 +15,7 @@ const EventId = () => {
     return (
       <div>
         <h1>EventId Page</h1>
-        <EventItem event={event} />
+        <EventDetail event={event} />
       </div>
     );
   }

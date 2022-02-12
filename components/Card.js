@@ -1,27 +1,25 @@
 import Link from 'next/link';
 
 const Card = (props) => {
-  {
-    console.log(props.event.title);
-  }
+  const { event } = props;
 
   return (
     <li>
-      {props.event.id}
+      {event.id}
       <div>
-        <img src={props.event.image} alt={props.event.title} />
+        <img src={event.image} alt={event.title} />
       </div>
 
-      <h3>{props.event.title}</h3>
-      <p>{props.event.date}</p>
-      <p>{props.event.description}</p>
+      <h3>{event.title}</h3>
+      <p>{event.date}</p>
+      <p>{event.description}</p>
 
       <Link
         href={{
           pathname: '/events/[id]',
-          query: { id: props.event.id },
+          query: { id: event.id },
         }}>
-        {props.event.title}
+        {event.title}
       </Link>
     </li>
   );

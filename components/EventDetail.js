@@ -2,19 +2,19 @@ const EventItem = (props) => {
   if (props === undefined) {
     return null;
   } else {
+    const { event } = props;
+
     return (
       <div>
-        {props.event.id}
+        <h2>{event.id}</h2>
         <div>
-          <img
-            src={'../../' + `${props.event.image}`}
-            alt={props.event.title}
-          />
+          <img src={'../../' + `${event.image}`} alt={event.title} />
         </div>
 
-        <h3>{props.event.title}</h3>
-        <p>{props.event.date}</p>
-        <p>{props.event.description}</p>
+        <h3>{event.title}</h3>
+        <p>{event.date}</p>
+        <address>{event.location}</address>
+        <p>{event.description}</p>
       </div>
     );
   }

@@ -14,7 +14,7 @@ const EventId = () => {
   } else {
     return (
       <div>
-        <h1>EventId Page</h1>
+        <h1>Event Detail Page</h1>
         <EventDetail event={event} />
       </div>
     );

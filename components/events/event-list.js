@@ -1,7 +1,7 @@
 import EventItem from './event-item';
 import classes from './event-list.module.css';
 
-function EventList(props) {
+const EventList = (props) => {
   const { items } = props;
 
   return (
@@ -18,6 +18,6 @@ function EventList(props) {
       ))}
     </ul>
   );
-}
+};
 
 export default EventList;

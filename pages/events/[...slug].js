@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { getFilteredEvents } from '../../data/dummy-data';
 import EventList from '../../components/events/event-list';
+import ResultsTitle from '../../components/events/results-title';
 import ErrorAlert from '../../components/ui/error-alert';
 import Button from '../../components/ui/button';
 
@@ -59,8 +60,12 @@ const FilteredEventsPage = () => {
     );
   }
 
+  // "-1" because Date takes the first month as 0
+  const date = new Date(numYear, numMonth - 1);
+
   return (
     <>
+      <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
   );

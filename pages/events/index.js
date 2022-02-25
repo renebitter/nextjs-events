@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-// import { getAllEvents } from '../../data/dummy-data';
 import EventList from '../../components/events/event-list';
 import EventsSearch from '../../components/events/events-search';
 
@@ -25,13 +24,11 @@ export async function getStaticProps() {
   const response = await fetch(
     'https://nextjs-course-data-fetch-6969f-default-rtdb.firebaseio.com/events.json'
   );
-
   const data = await response.json();
-
   const events = Object.values(data);
 
   return {
     props: { events: events },
-    revalidate: 10,
+    revalidate: 60,
   };
 }

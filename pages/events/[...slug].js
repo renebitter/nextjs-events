@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { getFilteredEvents } from '../../data/dummy-data';
+// import { getFilteredEvents } from '../../data/dummy-data';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import ErrorAlert from '../../components/ui/error-alert';
@@ -41,10 +41,10 @@ const FilteredEventsPage = () => {
     );
   }
 
-  const filteredEvents = getFilteredEvents({
-    year: numYear,
-    month: numMonth,
-  });
+  // const filteredEvents = getFilteredEvents({
+  //   year: numYear,
+  //   month: numMonth,
+  // });
 
   // NO FILTERED EVENTS
   if (!filteredEvents || filteredEvents.length === 0) {

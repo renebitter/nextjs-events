@@ -15,12 +15,32 @@ const FilteredEventsPage = (props) => {
     return <p className='center'>Loading...</p>;
   }
 
+  if (
+    isNaN(numYear) ||
+    isNaN(numMonth) ||
+    numYear > 2030 ||
+    numYear < 2021 ||
+    numMonth < 1 ||
+    numMonth > 12
+  ) {
+    return (
+      <>
+        <ErrorAlert>
+          <p>Invalid filter!</p>
+        </ErrorAlert>
+        <div className='center'>
+          <Button link='/events'>Show All Events</Button>
+        </div>
+      </>
+    );
+  }
+
   // NO FILTERED EVENTS
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
         <ErrorAlert>
-          <p>No events found for the chosen filter!</p>
+          <p>No events found for the chosen date!</p>
         </ErrorAlert>
         <div className='center'>
           <Button link='/events'>Show All Events</Button>
@@ -47,24 +67,6 @@ export async function getServerSideProps(context) {
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
 
-  if (
-    isNaN(numYear) ||
-    isNaN(numMonth) ||
-    numYear > 2030 ||
-    numYear < 2021 ||
-    numMonth < 1 ||
-    numMonth > 12
-  ) {
-    console.log('hasError');
-    return {
-      props: { hasError: true },
-      // notFound: true,
-      // redirect: {
-      //   destination: '/error'
-      // }
-    };
-  }
-
   async function getFilteredEvents(dateFilter) {
     const { year, month } = dateFilter;
 
@@ -88,8 +90,6 @@ export async function getServerSideProps(context) {
     year: numYear,
     month: numMonth,
   });
-
-  console.log(filteredEvents);
 
   return {
     props: {

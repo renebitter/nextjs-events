@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import EventList from '../components/events/event-list';
 
 function HomePage(props) {
@@ -5,6 +6,10 @@ function HomePage(props) {
 
   return (
     <div>
+      <Head>
+        <title>Events</title>
+        <meta name='description' content='lorem ipsum' />
+      </Head>
       <EventList items={events} />
     </div>
   );

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import ErrorAlert from '../../components/ui/error-alert';
@@ -11,8 +12,23 @@ const FilteredEventsPage = (props) => {
   // "-1" because Date takes the first month as 0
   const createDate = new Date(numYear, numMonth - 1);
 
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name='description'
+        content={`All events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
+
   if (!filteredEvents) {
-    return <p className='center'>Loading...</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className='center'>Loading...</p>
+      </>
+    );
   }
 
   if (
@@ -25,6 +41,7 @@ const FilteredEventsPage = (props) => {
   ) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter!</p>
         </ErrorAlert>
@@ -39,6 +56,7 @@ const FilteredEventsPage = (props) => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen date!</p>
         </ErrorAlert>
@@ -51,6 +69,7 @@ const FilteredEventsPage = (props) => {
 
   return (
     <>
+      {pageHeadData}
       <ResultsTitle date={createDate} />
       <EventList items={filteredEvents} />
     </>

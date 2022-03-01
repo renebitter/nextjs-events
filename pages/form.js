@@ -20,18 +20,17 @@ function Form() {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    }).then((response) => response.json());
+    // .then((data) => console.log(data));
   }
 
-  // function loadFeedbackHandler() {
-  //   fetch('/api/feedback')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setFeedbackItems(data.feedback);
-  //     });
-  // }
+  function loadFeedbackHandler() {
+    fetch('/api/feedback')
+      .then((response) => response.json())
+      .then((data) => {
+        setFeedbackItems(data.feedback);
+      });
+  }
 
   return (
     <div style={{ margin: '0 auto', width: '300px' }}>
@@ -48,12 +47,12 @@ function Form() {
         <button>Send Feedback</button>
       </form>
       <hr />
-      {/* <button onClick={loadFeedbackHandler}>Load Feedback</button> */}
-      {/* <ul>
-      {feedbackItems.map((item) => (
-        <li key={item.id}>{item.text}</li>
-      ))}
-    </ul> */}
+      <button onClick={loadFeedbackHandler}>Load Feedback</button>
+      <ul>
+        {feedbackItems.map((item) => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
     </div>
   );
 }

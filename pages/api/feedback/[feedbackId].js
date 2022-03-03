@@ -1,4 +1,4 @@
-import { buildFeedbackPath, extractFeedback } from './feedback';
+import { buildFeedbackPath, extractFeedback } from './index';
 
 function handler(req, res) {
   // if (req.method === 'POST')

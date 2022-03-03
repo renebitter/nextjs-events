@@ -1,4 +1,4 @@
-import { buildFeedbackPath, extractFeedback } from '../api/feedback/feedback';
+import { buildFeedbackPath, extractFeedback } from '../api/feedback';
 import { useState } from 'react';
 
 function FeedbackPage(props) {

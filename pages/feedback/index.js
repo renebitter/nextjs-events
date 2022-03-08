@@ -5,12 +5,22 @@ function FeedbackPage(props) {
   //redundant, since it's already available from getStaticProps
   const [feedbackData, setFeedbackData] = useState();
 
+  //Fetching data with API call (no need, since data is passed through props already)
+  // function loadFeedbackHandler(id) {
+  //   fetch(`/api/feedback/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setFeedbackData(data.feedback);
+  //     });
+  // }
+
+  //Using static props:
   function loadFeedbackHandler(id) {
-    fetch(`/api/feedback/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFeedbackData(data.feedback);
-      });
+    const selectedFeedback = props.feedbackItems.find(
+      (feedback) => feedback.id === id
+    );
+
+    setFeedbackData(selectedFeedback);
   }
 
   return (
@@ -21,12 +31,12 @@ function FeedbackPage(props) {
           <li key={item.id}>
             {item.text}
 
-            {/* loadFeedbackHandler.bind(null -> this, item.id -> firs argument) */}
+            {/* Using .bind(null -> this, item.id -> firs argument) */}
             {/* <button onClick={loadFeedbackHandler.bind(null, item.id)}>
               Show Details
             </button> */}
 
-            {/* onClick={loadFeedbackHandler(item.id) won't work because it calls the function before clicking*/}
+            {/* onClick={loadFeedbackHandler(item.id) won't work because it would call the function before clicking*/}
             <button onClick={() => loadFeedbackHandler(item.id)}>
               Show Details
             </button>

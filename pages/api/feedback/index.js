@@ -29,6 +29,10 @@ function handler(req, res) {
     const data = extractFeedback(filePath);
 
     data.push(newFeedback);
+
+    console.table(newFeedback);
+    console.table(data);
+
     fs.writeFileSync(filePath, JSON.stringify(data));
 
     res.status(201).json({ message: 'Success', feedback: newFeedback });
@@ -36,6 +40,8 @@ function handler(req, res) {
     //Call DRY functions
     const filePath = buildFeedbackPath();
     const data = extractFeedback(filePath);
+
+    console.table(data);
 
     res.status(200).json({ feedback: data });
   }

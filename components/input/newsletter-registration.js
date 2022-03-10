@@ -11,10 +11,11 @@ function NewsletterRegistration() {
     // fetch user input (state or refs)
     // optional: validate input
     // send valid data to API
-    console.log(userEmail);
-    console.log(JSON.stringify(userEmail));
 
     const reqBody = { email: userEmail };
+
+    console.log(reqBody);
+    console.log(JSON.stringify(reqBody));
 
     await fetch('/api/newsletter', {
       method: 'POST',

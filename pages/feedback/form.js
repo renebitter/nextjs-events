@@ -1,3 +1,5 @@
+//This should be a component
+
 import { useRef, useState } from 'react';
 
 function Form() {

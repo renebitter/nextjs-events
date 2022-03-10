@@ -32,6 +32,7 @@ function NewComment(props) {
       email: enteredEmail,
       name: enteredName,
       text: enteredComment,
+      // eventId is set by API route
     });
   }
 

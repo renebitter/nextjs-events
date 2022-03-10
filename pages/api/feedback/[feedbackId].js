@@ -3,7 +3,7 @@ import { buildFeedbackPath, extractFeedback } from './index';
 function handler(req, res) {
   // if (req.method === 'POST')
 
-  //Every method
+  //No conditional will accept any method (GET, POST, etc)
   const feedbackId = req.query.feedbackId;
   const filePath = buildFeedbackPath();
   const feedbackData = extractFeedback(filePath);

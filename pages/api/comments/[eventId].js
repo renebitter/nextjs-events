@@ -15,9 +15,7 @@ export function extractComments(filePath) {
 
 function handler(req, res) {
   const eventId = req.query.eventId;
-  console.log(req.query.eventId);
 
-  console.log(req.body);
   if (req.method === 'POST') {
     //get data from http req body
     const { email, name, text } = req.body;
@@ -25,6 +23,7 @@ function handler(req, res) {
     //Server-side validation
     if (
       !email.includes('@') ||
+      !email.includes('.') ||
       !name ||
       name.trim() === '' ||
       !text ||
@@ -56,7 +55,9 @@ function handler(req, res) {
     fs.writeFileSync(filePath, JSON.stringify(data));
 
     res.status(201).json({ message: 'Success', comment: newComment });
-  } else {
+  }
+
+  if (req.method === 'GET') {
     //Call DRY functions
     const filePath = buildCommentsPath();
     const data = extractComments(filePath);

@@ -16,10 +16,15 @@ async function handler(req, res) {
     console.log('Connected successfully to server');
 
     const db = client.db();
-    const insertResult = await db
-      .collection('emails')
-      .insertOne({ email: userEmail });
-    console.log('Inserted documents =>', insertResult);
+
+    try {
+      const insertResult = await db
+        .collection('emails')
+        .insertOne({ email: userEmail });
+      console.log('Inserted documents =>', insertResult);
+    } catch (error) {
+      res.status(500).json({ message: 'Inserting data failed!' });
+    }
 
     client.close();
 

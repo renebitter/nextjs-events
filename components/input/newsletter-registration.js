@@ -1,21 +1,26 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import classes from './newsletter-registration.module.css';
 
 function NewsletterRegistration() {
   const emailInputRef = useRef();
+  const [isInvalid, setIsInvalid] = useState(false);
 
   async function registrationHandler(event) {
     event.preventDefault();
     const userEmail = emailInputRef.current.value;
-    // fetch user input (state or refs)
-    // optional: validate input
-    // send valid data to API
 
     const reqBody = { email: userEmail };
 
-    console.log(reqBody);
-    console.log(JSON.stringify(reqBody));
+    if (
+      !userEmail ||
+      userEmail.trim() === '' ||
+      !userEmail.includes('@') ||
+      !userEmail.includes('.')
+    ) {
+      setIsInvalid(true);
+      return;
+    }
 
     await fetch('/api/newsletter', {
       method: 'POST',
@@ -42,6 +47,7 @@ function NewsletterRegistration() {
           />
           <button>Register</button>
         </div>
+        {isInvalid && <p>Please enter a valid email address!</p>}
       </form>
     </section>
   );

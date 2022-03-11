@@ -23,14 +23,13 @@ async function handler(req, res) {
 
     //create new object
     const newComment = {
-      id: new Date().toISOString(),
       email: email,
       name: name,
       text: text,
       eventId: eventId,
     };
 
-    const client = await MongoClient.connect(process.env.MONGODB_COMMENTS_URI);
+    const client = await MongoClient.connect(process.env.MONGODB_EVENTS_URI);
     console.log('Connected successfully to server');
 
     const db = client.db();
@@ -43,7 +42,7 @@ async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const client = await MongoClient.connect(process.env.MONGODB_COMMENTS_URI);
+    const client = await MongoClient.connect(process.env.MONGODB_EVENTS_URI);
     console.log('Connected successfully to server');
 
     const db = client.db();

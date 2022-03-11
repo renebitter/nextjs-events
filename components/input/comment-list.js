@@ -24,8 +24,8 @@ function CommentList(props) {
         {/* Render list of comments - fetched from API */}
 
         {comments
-          //filter comments for given detail page.
-          .filter((event) => event.eventId === eventId)
+          //filter comments for given detail page. No need, since it's done in the API
+          // .filter((event) => event.eventId === eventId)
           .map((comment) => (
             <li key={comment.id}>
               <p>{comment.text}</p>

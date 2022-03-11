@@ -1,19 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { MongoClient } from 'mongodb';
 
-//DRY
-export function buildCommentsPath() {
-  return path.join(process.cwd(), 'data', 'comments.json');
-}
-
-//DRY
-export function extractComments(filePath) {
-  const fileData = fs.readFileSync(filePath);
-  const data = JSON.parse(fileData);
-  return data;
-}
-
-function handler(req, res) {
+async function handler(req, res) {
   const eventId = req.query.eventId;
 
   if (req.method === 'POST') {
@@ -43,28 +30,39 @@ function handler(req, res) {
       eventId: eventId,
     };
 
-    //Call DRY functions
-    const filePath = buildCommentsPath();
-    const data = extractComments(filePath);
+    const client = await MongoClient.connect(process.env.MONGODB_COMMENTS_URI);
+    console.log('Connected successfully to server');
 
-    data.push(newComment);
+    const db = client.db();
+    const insertResult = await db.collection('comments').insertOne(newComment);
+    console.log('Inserted documents =>', insertResult);
 
-    console.table(newComment);
-    console.table(data);
-
-    fs.writeFileSync(filePath, JSON.stringify(data));
+    client.close();
 
     res.status(201).json({ message: 'Success', comment: newComment });
   }
 
   if (req.method === 'GET') {
-    //Call DRY functions
-    const filePath = buildCommentsPath();
-    const data = extractComments(filePath);
+    const client = await MongoClient.connect(process.env.MONGODB_COMMENTS_URI);
+    console.log('Connected successfully to server');
 
-    console.table(data);
+    const db = client.db();
 
-    res.status(200).json({ comments: data });
+    // const findResult = await db.collection('comments').find({}).toArray();
+    // console.log('Found documents =>', findResult);
+
+    const filteredDocs = await db
+      .collection('comments')
+      .find({ eventId: eventId })
+      .toArray();
+    console.log(
+      `Found documents filtered by eventId: ${eventId} =>`,
+      filteredDocs
+    );
+
+    client.close();
+
+    res.status(200).json({ comments: filteredDocs });
   }
 }
 

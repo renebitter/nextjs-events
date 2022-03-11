@@ -53,6 +53,7 @@ async function handler(req, res) {
     const filteredDocs = await db
       .collection('comments')
       .find({ eventId: eventId })
+      .sort({ _id: -1 }) // sort by descending order
       .toArray();
     console.log(
       `Found documents filtered by eventId: ${eventId} =>`,

@@ -27,7 +27,7 @@ function CommentList(props) {
           //filter comments for given detail page. No need, since it's done in the API
           // .filter((event) => event.eventId === eventId)
           .map((comment) => (
-            <li key={comment.id}>
+            <li key={comment._id}>
               <p>{comment.text}</p>
               <div>By {comment.name}</div>
               <div>

@@ -1,10 +1,25 @@
-import { MongoClient } from 'mongodb';
+import {
+  connectDatabase,
+  insertDocument,
+  filteredDocs,
+} from '../../../helpers/db-util';
 
 async function handler(req, res) {
   const eventId = req.query.eventId;
 
+  // const client = new MongoClient(url);
+  let client;
+
+  //Database connection
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    res.status(500).json({ message: 'Connection failed!' });
+    return;
+  }
+
   if (req.method === 'POST') {
-    //get data from http req body
+    //Get data from http req body
     const { email, name, text } = req.body;
 
     //Server-side validation
@@ -21,7 +36,7 @@ async function handler(req, res) {
       return;
     }
 
-    //create new object
+    //Create new object
     const newComment = {
       email: email,
       name: name,
@@ -29,41 +44,41 @@ async function handler(req, res) {
       eventId: eventId,
     };
 
-    const client = await MongoClient.connect(process.env.MONGODB_EVENTS_URI);
-    console.log('Connected successfully to server');
-
-    const db = client.db();
-    const insertResult = await db.collection('comments').insertOne(newComment);
-    console.log('Inserted documents =>', insertResult);
-
-    client.close();
-
-    res.status(201).json({ message: 'Success', comment: newComment });
+    //Data insertion
+    try {
+      await insertDocument(client, 'comments', newComment);
+      res
+        .status(201)
+        .json({ message: 'Comment added successfully.', comment: newComment });
+    } catch (error) {
+      res.status(500).json({ message: 'Inserting data failed!' });
+    }
   }
 
   if (req.method === 'GET') {
-    const client = await MongoClient.connect(process.env.MONGODB_EVENTS_URI);
-    console.log('Connected successfully to server');
+    try {
+      //Show comments per filter "eventId"
+      //Arguments: (client, collection, eventId, sort)
+      const documents = await filteredDocs(
+        client,
+        'comments',
+        { eventId: eventId },
+        { _id: -1 }
+      );
+      res.status(200).json({ comments: documents });
+    } catch (error) {
+      res.status(500).json({ message: 'Getting comments failed.' });
+    }
 
-    const db = client.db();
-
-    // const findResult = await db.collection('comments').find({}).toArray();
-    // console.log('Found documents =>', findResult);
-
-    const filteredDocs = await db
-      .collection('comments')
-      .find({ eventId: eventId })
-      .sort({ _id: -1 }) // sort by descending order
-      .toArray();
-    console.log(
-      `Found documents filtered by eventId: ${eventId} =>`,
-      filteredDocs
-    );
-
-    client.close();
-
-    res.status(200).json({ comments: filteredDocs });
+    //Gets all comments
+    // try {
+    //   const documents = await getAllDocuments(client, 'comments', { _id: -1 });
+    //   res.status(200).json({ comments: documents });
+    // } catch (error) {
+    //   res.status(500).json({ message: 'Getting comments failed.' });
+    // }
   }
+  client.close();
 }
 
 export default handler;

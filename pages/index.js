@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import EventList from '../components/events/event-list';
+import NewsletterRegistration from '../components/input/newsletter-registration';
 
 function HomePage(props) {
   const { events } = props;
@@ -10,6 +11,7 @@ function HomePage(props) {
         <title>Events</title>
         <meta name='description' content='lorem ipsum' />
       </Head>
+      <NewsletterRegistration />
       <EventList items={events} />
     </div>
   );

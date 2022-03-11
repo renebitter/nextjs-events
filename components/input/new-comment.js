@@ -19,6 +19,7 @@ function NewComment(props) {
       !enteredEmail ||
       enteredEmail.trim() === '' ||
       !enteredEmail.includes('@') ||
+      !enteredEmail.includes('.') ||
       !enteredName ||
       enteredName.trim() === '' ||
       !enteredComment ||

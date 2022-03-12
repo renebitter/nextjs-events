@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Next.js Events Webpage
 
-## Getting Started
+Online at: [http://localhost:3000](http://localhost:3000).
 
-First, run the development server:
+Webpage features:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Featured events
+- Email newsletter registration
+- List of all events
+- Filter all events by date
+- Event detail page
+- Show comments
+- Submit comments
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Concepts and tech used:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- React
+  - Hooks (`useEffect`, `useState`, `useRef`)
+  - Client-side data fetching
+- CSS modules
+- Next.js
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+  - `getStaticProps`
+  - `getStaticPaths`
+  - `getServerSideProps`
+  - Routing `next/link` & `next/router` - e.g. `<Link href='/'>`, `router.push()`, `router.query()`
+  - Image optimization with `next/image`
+  - Head
+  - API Routes (`dynamic`, `async` / `await`, `error handling`)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Mongodb (for comments & newsletter)
+- Firebase (for events info)
+- JSON
+- REST API with fetch
 
-## Learn More
+## TODO:
 
-To learn more about Next.js, take a look at the following resources:
+- Add form submit frontend feedback for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - [ ] Newsletter email registration
+  - [ ] Submit comment
+  - [ ] Verify if examples from "api/feedback" are equivalent to "api/comments" and "api/newsletter" then delete it (pre-render & dynamic route ?)
+  - [ ] Rename repo
+  - [ ] Deploy & update README link to page

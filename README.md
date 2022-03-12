@@ -20,8 +20,8 @@ Webpage description/features:
 - CSS modules
 - Next.js
 
-  - `getStaticProps`
-  - `getStaticPaths`
+  - `getStaticProps` `revalidate`
+  - `getStaticPaths` `fallback`
   - `getServerSideProps`
   - Routing `next/link` & `next/router` - e.g. `<Link href='/'>`, `router.push()`, `router.query()`
   - Image optimization with `next/image`

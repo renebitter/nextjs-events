@@ -40,5 +40,5 @@ Webpage description/features:
   - [ ] Newsletter email registration
   - [ ] Submit comment
   - [ ] Verify if examples from "api/feedback" are equivalent to "api/comments" and "api/newsletter" then delete it (pre-render & dynamic route ?)
-  - [ ] Rename repo
+  - [x] Rename repo
   - [ ] Deploy & update README link to page

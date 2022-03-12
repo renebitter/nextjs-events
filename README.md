@@ -2,7 +2,7 @@
 
 Online at: [http://localhost:3000](http://localhost:3000).
 
-Webpage features:
+Webpage description/features:
 
 - Featured events
 - Email newsletter registration

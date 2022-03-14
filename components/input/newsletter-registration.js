@@ -45,6 +45,7 @@ function NewsletterRegistration() {
             aria-label='Your email'
             ref={emailInputRef}
           />
+          {/* TODO: disabled={isLoading ? "disabled" :"" */}
           <button>Register</button>
         </div>
         {isInvalid && <p>Please enter a valid email address!</p>}

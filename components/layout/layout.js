@@ -7,7 +7,7 @@ import NotificationContext from '../../store/notification-context';
 function Layout(props) {
   const notificationCtx = useContext(NotificationContext);
 
-  const activeNotification = NotificationContext.notification;
+  const activeNotification = notificationCtx.notification;
 
   return (
     <>

@@ -9,11 +9,27 @@ function Comments(props) {
   //eventId props comes from [eventId].js PAGE. <Comments eventId={event.id} />
   const { eventId } = props;
   const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState();
+  const [loading, setLoading] = useState(false);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
   }
 
+  //Fetch existing comments
+  useEffect(() => {
+    if (showComments) {
+      setLoading(true);
+
+      fetch('/api/comments/' + eventId)
+        .then((response) => response.json())
+        .then((data) => {
+          setComments(data.comments), setLoading(false);
+        });
+    }
+  }, [showComments]);
+
+  //Add new comment
   async function addCommentHandler(commentData) {
     //Call the API and POST data
     await fetch('/api/comments/' + eventId, {
@@ -36,7 +52,8 @@ function Comments(props) {
       .then((data) => {
         notificationCtx.showNotification({
           title: 'Success!',
-          message: 'Successfully registered for newsletter',
+          message:
+            'Thank you, ' + data.comment.name + '. Your message was saved',
           status: 'success',
         });
       })
@@ -47,8 +64,6 @@ function Comments(props) {
           status: 'error',
         });
       });
-    // data = undefined
-    // .then((data) => console.log(data));
   }
 
   return (
@@ -57,7 +72,7 @@ function Comments(props) {
         {showComments ? 'Hide' : 'Show'} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && <CommentList eventId={eventId} />}
+      {showComments && <CommentList items={comments} loading={loading} />}
     </section>
   );
 }

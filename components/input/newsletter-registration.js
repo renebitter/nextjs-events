@@ -10,7 +10,6 @@ function NewsletterRegistration() {
   async function registrationHandler(event) {
     event.preventDefault();
     const userEmail = emailInputRef.current.value;
-
     const reqBody = { email: userEmail };
 
     if (

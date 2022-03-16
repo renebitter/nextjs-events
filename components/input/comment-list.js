@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import classes from './comment-list.module.css';
+import LoadingSpinner from '../ui/loading-spinner';
 
 function CommentList(props) {
   const { eventId } = props;
@@ -17,7 +18,7 @@ function CommentList(props) {
   }, []);
 
   if (comments === undefined || loading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   } else {
     return (
       <ul className={classes.comments}>

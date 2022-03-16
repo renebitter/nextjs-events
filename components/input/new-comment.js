@@ -1,10 +1,9 @@
-import { useRef, useState, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import NotificationContext from '../../store/notification-context';
 import classes from './new-comment.module.css';
 
 function NewComment(props) {
   const notificationCtx = useContext(NotificationContext);
-  const [isInvalid, setIsInvalid] = useState(false);
 
   const emailInputRef = useRef();
   const nameInputRef = useRef();
@@ -38,7 +37,7 @@ function NewComment(props) {
 
     notificationCtx.showNotification({
       title: 'Sending message...',
-      message: 'Registering for newsletter.',
+      message: 'Delivering your message.',
       status: 'pending',
     });
 
@@ -66,7 +65,6 @@ function NewComment(props) {
         <label htmlFor='comment'>Your comment</label>
         <textarea id='comment' rows='5' ref={commentInputRef}></textarea>
       </div>
-      {/* {isInvalid && <p>Please enter a valid email address and comment!</p>} */}
       <button>Submit</button>
     </form>
   );

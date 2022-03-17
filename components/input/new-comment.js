@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef, useContext } from 'react';
+import NotificationContext from '../../store/notification-context';
 import classes from './new-comment.module.css';
 
 function NewComment(props) {
-  const [isInvalid, setIsInvalid] = useState(false);
+  const notificationCtx = useContext(NotificationContext);
 
   const emailInputRef = useRef();
   const nameInputRef = useRef();
@@ -25,9 +26,19 @@ function NewComment(props) {
       !enteredComment ||
       enteredComment.trim() === ''
     ) {
-      setIsInvalid(true);
+      notificationCtx.showNotification({
+        title: 'Invalid message',
+        message: 'Please enter a valid email address, name and comment.',
+        status: 'error',
+      });
       return;
     }
+
+    notificationCtx.showNotification({
+      title: 'Sending message...',
+      message: 'Delivering your message.',
+      status: 'pending',
+    });
 
     props.onAddComment({
       email: enteredEmail,
@@ -53,7 +64,6 @@ function NewComment(props) {
         <label htmlFor='comment'>Your comment</label>
         <textarea id='comment' rows='5' ref={commentInputRef}></textarea>
       </div>
-      {isInvalid && <p>Please enter a valid email address and comment!</p>}
       <button>Submit</button>
     </form>
   );

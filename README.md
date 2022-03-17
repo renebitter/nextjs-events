@@ -37,8 +37,8 @@ Webpage description/features:
 
 - Add form submit frontend feedback for:
 
-  - [ ] Newsletter email registration
-  - [ ] Submit comment
+  - [ ] Deploy & update README link to page
   - [ ] Verify if examples from "api/feedback" are equivalent to "api/comments" and "api/newsletter" then delete it (pre-render & dynamic route ?)
   - [x] Rename repo
-  - [ ] Deploy & update README link to page
+  - [x] Newsletter email registration
+  - [x] Submit comment

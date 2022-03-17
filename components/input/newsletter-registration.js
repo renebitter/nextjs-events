@@ -1,6 +1,5 @@
 import { useRef, useContext } from 'react';
 import NotificationContext from '../../store/notification-context';
-
 import classes from './newsletter-registration.module.css';
 
 function NewsletterRegistration() {
@@ -23,6 +22,7 @@ function NewsletterRegistration() {
         message: 'Please enter a valid email address.',
         status: 'error',
       });
+      return;
     } else {
       notificationCtx.showNotification({
         title: 'Signing up...',
@@ -50,7 +50,7 @@ function NewsletterRegistration() {
         .then((data) => {
           notificationCtx.showNotification({
             title: 'Success!',
-            message: 'Successfully registered for newsletter',
+            message: 'Successfully added your message',
             status: 'success',
           });
         })

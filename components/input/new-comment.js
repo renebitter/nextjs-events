@@ -26,7 +26,6 @@ function NewComment(props) {
       !enteredComment ||
       enteredComment.trim() === ''
     ) {
-      setIsInvalid(true);
       notificationCtx.showNotification({
         title: 'Invalid message',
         message: 'Please enter a valid email address, name and comment.',

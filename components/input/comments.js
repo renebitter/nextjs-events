@@ -56,6 +56,13 @@ function Comments(props) {
             'Thank you, ' + data.comment.name + '. Your message was saved',
           status: 'success',
         });
+
+        //Fetch comments again after POST
+        fetch('/api/comments/' + eventId)
+          .then((response) => response.json())
+          .then((data) => {
+            setComments(data.comments), setLoading(false);
+          });
       })
       .catch((error) => {
         notificationCtx.showNotification({
@@ -63,6 +70,7 @@ function Comments(props) {
           message: error.message || 'Something went wrong',
           status: 'error',
         });
+        console.error(error);
       });
   }
 

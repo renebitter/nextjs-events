@@ -5,7 +5,7 @@ Online at: [http://localhost:3000](http://localhost:3000).
 Webpage description/features:
 
 - Featured events
-- Email newsletter registration
+- E-mail newsletter registration
 - List of all events
 - Filter all events by date
 - Event detail page
